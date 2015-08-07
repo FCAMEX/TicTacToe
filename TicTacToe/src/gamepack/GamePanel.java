@@ -58,6 +58,10 @@ public class GamePanel extends JPanel {
 	 * variable that stores the current instance of the glass pane
 	 */
 	private EndGlassPane glass;
+	/**
+	 * variable that stores the current game board size
+	 */
+	private int boardSize;
 
 	/**
 	 * class constructor that creates a new game board and sets up the game
@@ -77,6 +81,7 @@ public class GamePanel extends JPanel {
 
 		super();
 		this.glass = glass;
+		this.boardSize = boardSize;
 		game = new GameBoard(boardSize, glass, compX, compO);
 		corner = false;
 		this.compX = compX;
@@ -91,7 +96,7 @@ public class GamePanel extends JPanel {
 	 */
 	private void panelSetup() {
 
-		GridLayout lay = new GridLayout(0, 3);
+		GridLayout lay = new GridLayout(0, boardSize);
 		lay.setVgap(5);
 		lay.setHgap(5);
 		this.setLayout(lay);
@@ -226,17 +231,17 @@ public class GamePanel extends JPanel {
 		if (myVal == 1)
 			checkVal = 2;
 
-		h = checkWinH(myVal);
+		h = checkWinHorizontal(myVal);
 		if (!h)
-			h = checkWinV(myVal);
+			h = checkWinVertical(myVal);
 		if (!h)
-			h = checkWinD(myVal);
+			h = checkWinDiagonal(myVal);
 		if (!h)
-			h = checkWinH(checkVal);
+			h = checkWinHorizontal(checkVal);
 		if (!h)
-			h = checkWinV(checkVal);
+			h = checkWinVertical(checkVal);
 		if (!h)
-			h = checkWinD(checkVal);
+			h = checkWinDiagonal(checkVal);
 		return h;
 	}
 
@@ -249,7 +254,7 @@ public class GamePanel extends JPanel {
 	 *            victory
 	 * @return boolean indicating if there is a possibility to win 1 turn
 	 */
-	private boolean checkWinH(int checkVal) {
+	private boolean checkWinHorizontal(int checkVal) {
 
 		for (int i = 0; i < game.getSize(); i++) {
 
@@ -282,7 +287,7 @@ public class GamePanel extends JPanel {
 	 *            victory
 	 * @return boolean indicating if there is a possibility to win 1 turn
 	 */
-	private boolean checkWinV(int checkVal) {
+	private boolean checkWinVertical(int checkVal) {
 
 		for (int i = 0; i < game.getSize(); i++) {
 
@@ -315,7 +320,7 @@ public class GamePanel extends JPanel {
 	 *            victory
 	 * @return boolean indicating if there is a possibility to win 1 turn
 	 */
-	private boolean checkWinD(int checkVal) {
+	private boolean checkWinDiagonal(int checkVal) {
 
 		int v1 = game.board[0][0].getTileValue();
 		int v2 = game.board[1][1].getTileValue();
@@ -408,7 +413,7 @@ public class GamePanel extends JPanel {
 
 				game.boardCheck();
 
-				if (game.noVictory() && turnCount == 9)
+				if (game.noVictory() && turnCount == boardSize * boardSize)
 					glass.setTie();
 
 			}

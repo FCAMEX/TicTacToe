@@ -24,7 +24,7 @@ public class MainFrame extends JFrame {
 	 * variable that holds the size of the board 3*3 (the board is dynamically
 	 * generated so this can be changed)
 	 */
-	private int boardSize = 4;
+	private int boardSize = 3;
 	/**
 	 * stores an instance of GlassPane utilized by this frame
 	 */
