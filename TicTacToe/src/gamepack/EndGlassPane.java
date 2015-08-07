@@ -3,10 +3,8 @@ package gamepack;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.geom.Rectangle2D;
 
 import javax.swing.JPanel;
 
@@ -19,8 +17,12 @@ import javax.swing.JPanel;
  * @author Fernando Araujo
  * 
  */
-public class EndGlassPane extends JPanel {
+class EndGlassPane extends JPanel {
 
+	/**
+	 * created to fulfill the requirements of this class and separate this class version from others
+	 */
+	private static final long serialVersionUID = 2658174473255803716L;
 	/**
 	 * indicates if the game is tied
 	 */
@@ -33,14 +35,6 @@ public class EndGlassPane extends JPanel {
 	 * stores the text announcing the winner (X or O players)
 	 */
 	private String winLabel = "";
-	/**
-	 * stores the text announcing if there is a tie
-	 */
-	private String tieLabel = "It's a Tie!";
-	/**
-	 * stores the position (column, row or diagonal) of the winning line
-	 */
-	private int pos = 0;
 	/**
 	 * stores the x starting coordinate of the winning line indicator
 	 */
@@ -82,8 +76,6 @@ public class EndGlassPane extends JPanel {
 
 		win = true;
 
-		this.pos = pos;
-
 		x1 = 85 + (pos * 115);
 		y1 = 190;
 		x2 = 85 + (pos * 115);
@@ -102,11 +94,9 @@ public class EndGlassPane extends JPanel {
 	 * @param winner
 	 *            the winner string indicating the winning player
 	 */
-	public void setHWin(int pos, String winner) {
+	public void setHorizontalWin(int pos, String winner) {
 
 		win = true;
-
-		this.pos = pos;
 
 		x1 = 60;
 		y1 = 210 + (pos * 125);
@@ -126,11 +116,9 @@ public class EndGlassPane extends JPanel {
 	 * @param winner
 	 *            the winner string indicating the winning player
 	 */
-	public void setDWin(int pos, String winner) {
+	public void setDiagonalWin(int pos, String winner) {
 
 		win = true;
-
-		this.pos = pos;
 
 		x1 = 60 + (pos * 290);
 		y1 = 190;
@@ -143,13 +131,11 @@ public class EndGlassPane extends JPanel {
 
 	/**
 	 * set method that sets up if the game has been tied or not
-	 * 
-	 * @param tie
-	 *            boolean variable that indicates if there is a tie
+	 *
 	 */
-	public void setTie(boolean tie) {
+	public void setTie() {
 
-		this.tie = tie;
+		this.tie = true;
 		repaint();
 	}
 
@@ -178,6 +164,10 @@ public class EndGlassPane extends JPanel {
 
 			g2.setColor(Color.BLACK);
 			g2.setFont(new Font("Arial", Font.BOLD, 30));
+			/*
+	  stores the text announcing if there is a tie
+	 */
+			String tieLabel = "It's a Tie!";
 			g2.drawString(tieLabel, 140, 120);
 		}
 	}

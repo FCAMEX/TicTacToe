@@ -15,6 +15,10 @@ import javax.swing.*;
 public class GamePanel extends JPanel {
 
 	/**
+	 * created to fulfill the requirements of this class and separate this class version from others
+	 */
+	private static final long serialVersionUID = -5561317289049989706L;
+	/**
 	 * variable that holds an instance of the GameBoard currently in use
 	 */
 	private GameBoard game = new GameBoard();
@@ -34,26 +38,26 @@ public class GamePanel extends JPanel {
 	 * variable that stores the X location of the last computer move (for X
 	 * moves)
 	 */
-	int botX;
+	private int botX;
 	/**
 	 * variable that stores the O location of the last computer move (for X
 	 * moves)
 	 */
-	int botO;
+	private int botO;
 	/**
 	 * variable that stores if the non-computer player started in a corner or
 	 * not (for X moves)
 	 */
-	boolean corner = false;
+	private boolean corner = false;
 	/**
 	 * variable that defines an appropriate delay when clicking to improve
-	 * computer move's fluidity
+	 * computer moves' fluidity
 	 */
-	int delay = 150;
+	private int delay = 150;
 	/**
 	 * variable that stores the current instance of the glass pane
 	 */
-	EndGlassPane glass;
+	private EndGlassPane glass;
 
 	/**
 	 * class constructor that creates a new game board and sets up the game
@@ -215,7 +219,7 @@ public class GamePanel extends JPanel {
 	 */
 	private boolean checkWin(int myVal) {
 
-		boolean h = false;
+		boolean h;
 
 		int checkVal = 1;
 
@@ -223,15 +227,15 @@ public class GamePanel extends JPanel {
 			checkVal = 2;
 
 		h = checkWinH(myVal);
-		if (h == false)
+		if (!h)
 			h = checkWinV(myVal);
-		if (h == false)
+		if (!h)
 			h = checkWinD(myVal);
-		if (h == false)
+		if (!h)
 			h = checkWinH(checkVal);
-		if (h == false)
+		if (!h)
 			h = checkWinV(checkVal);
-		if (h == false)
+		if (!h)
 			h = checkWinD(checkVal);
 		return h;
 	}
@@ -249,9 +253,9 @@ public class GamePanel extends JPanel {
 
 		for (int i = 0; i < game.getSize(); i++) {
 
-			int v1 = game.board[i][0].getValue();
-			int v2 = game.board[i][1].getValue();
-			int v3 = game.board[i][2].getValue();
+			int v1 = game.board[i][0].getTileValue();
+			int v2 = game.board[i][1].getTileValue();
+			int v3 = game.board[i][2].getTileValue();
 
 			if (v1 == 0 && v2 == checkVal && v3 == checkVal) {
 				game.board[i][0].doClick(delay);
@@ -282,9 +286,9 @@ public class GamePanel extends JPanel {
 
 		for (int i = 0; i < game.getSize(); i++) {
 
-			int v1 = game.board[0][i].getValue();
-			int v2 = game.board[1][i].getValue();
-			int v3 = game.board[2][i].getValue();
+			int v1 = game.board[0][i].getTileValue();
+			int v2 = game.board[1][i].getTileValue();
+			int v3 = game.board[2][i].getTileValue();
 
 			if (v1 == 0 && v2 == checkVal && v3 == checkVal) {
 				game.board[0][i].doClick(delay);
@@ -313,9 +317,9 @@ public class GamePanel extends JPanel {
 	 */
 	private boolean checkWinD(int checkVal) {
 
-		int v1 = game.board[0][0].getValue();
-		int v2 = game.board[1][1].getValue();
-		int v3 = game.board[2][2].getValue();
+		int v1 = game.board[0][0].getTileValue();
+		int v2 = game.board[1][1].getTileValue();
+		int v3 = game.board[2][2].getTileValue();
 
 		if (v1 == 0 && v2 == checkVal && v3 == checkVal) {
 			game.board[0][0].doClick(delay);
@@ -330,9 +334,9 @@ public class GamePanel extends JPanel {
 			return true;
 		}
 
-		v1 = game.board[2][0].getValue();
-		v2 = game.board[1][1].getValue();
-		v3 = game.board[0][2].getValue();
+		v1 = game.board[2][0].getTileValue();
+		v2 = game.board[1][1].getTileValue();
+		v3 = game.board[0][2].getTileValue();
 
 		if (v1 == 0 && v2 == checkVal && v3 == checkVal) {
 			game.board[2][0].doClick(delay);
@@ -352,7 +356,7 @@ public class GamePanel extends JPanel {
 	}
 
 	/**
-	 * helper method that fills out any unplayed tile available (used in case of
+	 * helper method that fills out any non played tile available (used in case of
 	 * imminent tie)
 	 */
 	private void randPlay() {
@@ -372,15 +376,14 @@ public class GamePanel extends JPanel {
 	 * GameBoard it hold all the logic related to handling turns and automated
 	 * computer player movements
 	 */
-	public class Actions implements ActionListener {
+	private class Actions implements ActionListener {
 
 		public void actionPerformed(ActionEvent e) {
 
 			Object source = e.getSource();
 			if (source instanceof Tile) {
 
-				if (((Tile) source).getValue() == 0 && !game.getoVictory()
-						&& !game.getxVictory()) {
+				if (((Tile) source).getTileValue() == 0 && game.noVictory()) {
 					turnCount++;
 
 					if (turnCount % 2 == 1) {
@@ -405,9 +408,8 @@ public class GamePanel extends JPanel {
 
 				game.boardCheck();
 
-				if (!game.getoVictory() && !game.getxVictory()
-						&& turnCount == 9)
-					glass.setTie(true);
+				if (game.noVictory() && turnCount == 9)
+					glass.setTie();
 
 			}
 

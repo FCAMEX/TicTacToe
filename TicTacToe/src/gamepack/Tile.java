@@ -12,10 +12,14 @@ import javax.swing.*;
  */
 public class Tile extends JButton {
 	/**
+	 * created to fulfill the requirements of this class and separate this class version from others
+	 */
+	private static final long serialVersionUID = 5052560491417656408L;
+	/**
 	 * variable that holds a value indicating if the tile is an X (1) a O(2) or
 	 * empty (0)
 	 */
-	private int value = 0;
+	private int tileValue = 0;
 	/**
 	 * variable that holds the image to draw if the tile is in O position
 	 */
@@ -42,14 +46,14 @@ public class Tile extends JButton {
 	}
 
 	/**
-	 * get method that returns the value of value (if the tile holds an X, O or
+	 * get method that returns the value of tileValue (if the tile holds an X, O or
 	 * is empty)
 	 * 
-	 * @return value
+	 * @return tileValue
 	 */
-	public int getValue() {
+	public int getTileValue() {
 
-		return value;
+		return tileValue;
 	}
 
 	/**
@@ -58,11 +62,12 @@ public class Tile extends JButton {
 	public void setX() {
 
 		setIcon(new ImageIcon(imgX));
-		value = 1;
+		tileValue = 1;
 		paintImmediately(this.getBounds());
 		try {
-			Thread.sleep(50);
+			Thread.sleep(50); // delay of 50 milliseconds added to make the tile transition look smoother
 		} catch (InterruptedException ee) {
+			ee.printStackTrace();
 		}
 	}
 
@@ -72,11 +77,13 @@ public class Tile extends JButton {
 	public void setO() {
 
 		setIcon(new ImageIcon(imgO));
-		value = 2;
+		tileValue = 2;
 		paintImmediately(this.getBounds());
 		try {
-			Thread.sleep(50);
+			Thread.sleep(50); // delay of 50 milliseconds added to make the tile transition look smoother
 		} catch (InterruptedException ee) {
+			ee.printStackTrace();
+
 		}
 	}
 
@@ -87,7 +94,7 @@ public class Tile extends JButton {
 	 */
 	public boolean isEmpty() {
 
-		return value == 0;
+		return tileValue == 0;
 	}
 
 }

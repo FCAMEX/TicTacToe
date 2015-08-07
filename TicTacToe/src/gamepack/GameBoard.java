@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
  * @author Fernando Araujo
  * 
  */
-public class GameBoard {
+class GameBoard {
 	/**
 	 * variable that holds the size of the board 3*3 (the board is dynamically
 	 * generated so this can be changed)
@@ -71,29 +71,21 @@ public class GameBoard {
 	}
 
 	/**
-	 * get method that returns xVixctory
-	 * 
-	 * @return boolean that indicates if x has won
+	 * method that returns if Victory hasn't been achieved yet by either 0 or X
+	 *
+	 * @return boolean that indicates if there has been no Victory
 	 */
-	public boolean getxVictory() {
 
-		return xVictory;
+	public boolean noVictory(){
+
+		return !xVictory&& !oVictory;
 	}
 
-	/**
-	 * get method that returns oVixctory
-	 * 
-	 * @return boolean that indicates if o has won
-	 */
-	public boolean getoVictory() {
-
-		return oVictory;
-	}
 
 	/**
 	 * get method that returns the stored boardSize
 	 * 
-	 * @param boardSize
+	 * @return boardSize
 	 *            integer that defines the size of the desired GameBoard
 	 */
 	public int getSize() {
@@ -133,19 +125,22 @@ public class GameBoard {
 				}
 			}
 		} catch (IOException ex) {
+
+			System.out.print("The needed files 0.jpg and X.jpg were not found");
+
 		}
 
 	}
 
 	/**
-	 * method that checks if either X or O have won by calling checkDiag,
+	 * method that checks if either X or O have won by calling checkDiagonal,
 	 * checkRow and checkCol this method also updates the victory indicators
 	 * xVictory and oVictory
 	 */
 
 	public void boardCheck() {
 
-		checkDiag();
+		checkDiagonal();
 		if (xVictory || oVictory)
 			return;
 
@@ -165,7 +160,7 @@ public class GameBoard {
 	 * location this method also updates the victory indicators xVictory and
 	 * oVictory and sets up victory conditions on GlassPane
 	 */
-	private void checkDiag() {
+	private void checkDiagonal() {
 
 		int xValue = 1;
 		int oValue = 2;
@@ -175,26 +170,26 @@ public class GameBoard {
 
 		for (int i = 0; i < boardSize; i++) {
 
-			if (board[i][i].getValue() != xValue)
+			if (board[i][i].getTileValue() != xValue)
 				xVictory = false;
-			if (board[i][i].getValue() != oValue)
+			if (board[i][i].getTileValue() != oValue)
 				oVictory = false;
 
 		}
 		if (xVictory) {
 			if (compX || compO)
-				glass.setDWin(0, "Computer X Wins!");
+				glass.setDiagonalWin(0, "Computer X Wins!");
 			else
-				glass.setDWin(0, "1st Player X Wins!");
+				glass.setDiagonalWin(0, "1st Player X Wins!");
 			return;
 
 		}
 
 		if (oVictory) {
 			if (compX || compO)
-				glass.setDWin(0, "Computer O Wins!");
+				glass.setDiagonalWin(0, "Computer O Wins!");
 			else
-				glass.setDWin(0, "2nd Player O Wins!");
+				glass.setDiagonalWin(0, "2nd Player O Wins!");
 			return;
 		}
 
@@ -204,9 +199,9 @@ public class GameBoard {
 
 		for (int i = 0; i < boardSize; i++) {
 
-			if (board[i][y].getValue() != xValue)
+			if (board[i][y].getTileValue() != xValue)
 				xVictory = false;
-			if (board[i][y].getValue() != oValue)
+			if (board[i][y].getTileValue() != oValue)
 				oVictory = false;
 			y--;
 		}
@@ -214,18 +209,18 @@ public class GameBoard {
 		if (xVictory) {
 
 			if (compX || compO)
-				glass.setDWin(1, "Computer X Wins!");
+				glass.setDiagonalWin(1, "Computer X Wins!");
 			else
-				glass.setDWin(1, "1st Player X Wins!");
+				glass.setDiagonalWin(1, "1st Player X Wins!");
 
 		}
 
 		if (oVictory) {
 
 			if (compX || compO)
-				glass.setDWin(1, "Computer O Wins!");
+				glass.setDiagonalWin(1, "Computer O Wins!");
 			else
-				glass.setDWin(1, "2nd Player O Wins!");
+				glass.setDiagonalWin(1, "2nd Player O Wins!");
 
 		}
 
@@ -246,25 +241,25 @@ public class GameBoard {
 
 		for (int i = 0; i < boardSize; i++) {
 
-			if (board[row][i].getValue() != xValue)
+			if (board[row][i].getTileValue() != xValue)
 				xVictory = false;
-			if (board[row][i].getValue() != oValue)
+			if (board[row][i].getTileValue() != oValue)
 				oVictory = false;
 		}
 
 		if (xVictory) {
 			if (compX || compO)
-				glass.setHWin(row, "Computer X Wins!");
+				glass.setHorizontalWin(row, "Computer X Wins!");
 			else
-				glass.setHWin(row, "1st Player X Wins!");
+				glass.setHorizontalWin(row, "1st Player X Wins!");
 
 		}
 
 		if (oVictory) {
 			if (compX || compO)
-				glass.setHWin(row, "Computer O Wins!");
+				glass.setHorizontalWin(row, "Computer O Wins!");
 			else
-				glass.setHWin(row, "2nd Player O Wins!");
+				glass.setHorizontalWin(row, "2nd Player O Wins!");
 		}
 	}
 
@@ -283,9 +278,9 @@ public class GameBoard {
 
 		for (int i = 0; i < boardSize; i++) {
 
-			if (board[i][col].getValue() != xValue)
+			if (board[i][col].getTileValue() != xValue)
 				xVictory = false;
-			if (board[i][col].getValue() != oValue)
+			if (board[i][col].getTileValue() != oValue)
 				oVictory = false;
 		}
 

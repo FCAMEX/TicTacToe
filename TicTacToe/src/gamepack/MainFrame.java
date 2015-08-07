@@ -17,10 +17,14 @@ import javax.swing.border.BevelBorder;
  */
 public class MainFrame extends JFrame {
 	/**
+	 * created to fulfill the requirements of this class and separate this class version from others
+	 */
+	private static final long serialVersionUID = 4820094994749144539L;
+	/**
 	 * variable that holds the size of the board 3*3 (the board is dynamically
 	 * generated so this can be changed)
 	 */
-	private int boardSize = 3;
+	private int boardSize = 4;
 	/**
 	 * stores an instance of GlassPane utilized by this frame
 	 */
@@ -67,7 +71,7 @@ public class MainFrame extends JFrame {
 		super("TicTacToe");
 
 		setupFirstMenu();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(boardSize * 120, boardSize * 200);
 		setVisible(true);
 		setResizable(false);
@@ -95,6 +99,9 @@ public class MainFrame extends JFrame {
 			firstLog.add(picLab);
 
 		} catch (IOException ex) {
+
+			System.out.print("The needed resource file TicTacLogo.png was not found");
+
 		}
 
 		gameMode.setLayout(new GridLayout(0, 1));
@@ -204,7 +211,7 @@ public class MainFrame extends JFrame {
 	 * GUI it hold all the logic related to changing menus and calls to
 	 * start/restart/close the game
 	 */
-	public class MainActions implements ActionListener {
+	private class MainActions implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
 			Object source = e.getSource();
