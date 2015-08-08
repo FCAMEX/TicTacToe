@@ -28,7 +28,7 @@ public class MainFrame extends JFrame {
 	/**
 	 * stores an instance of GlassPane utilized by this frame
 	 */
-	private EndGlassPane topPane = new EndGlassPane();
+	private EndGlassPane topPane = new EndGlassPane(boardSize);
 	/**
 	 * boolean variable that stores if the computer is set as the X player
 	 */
@@ -75,6 +75,7 @@ public class MainFrame extends JFrame {
 		setSize(boardSize * 120, boardSize * 200);
 		setVisible(true);
 		setResizable(false);
+
 
 	}
 
@@ -164,11 +165,12 @@ public class MainFrame extends JFrame {
 	private void setupGame() {
 
 		menu = new JPanel();
-		topPane = new EndGlassPane();
+		topPane = new EndGlassPane(boardSize);
 		JPanel topMenu = new JPanel();
 		JButton closeB = new JButton("Close Game");
 		JButton restartB = new JButton("Restart");
 		JButton back = new JButton("Back");
+
 
 		this.setGlassPane(topPane);
 		topPane.setOpaque(false);
@@ -188,10 +190,13 @@ public class MainFrame extends JFrame {
 		restartB.setFocusPainted(false);
 		back.setFocusPainted(false);
 
+		if(boardSize > 3)
+		topMenu.setPreferredSize(new Dimension(500, 140));
 		topMenu.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
 		topMenu.add(back);
 		topMenu.add(restartB);
 		topMenu.add(closeB);
+
 
 		menu.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
 
@@ -222,7 +227,7 @@ public class MainFrame extends JFrame {
 
 				if (((JButton) source).getText().equals("Restart")) {
 					menu.remove(pan);
-					topPane = new EndGlassPane();
+					topPane = new EndGlassPane(boardSize);
 					setGlassPane(topPane);
 					topPane.setOpaque(false);
 					topPane.setVisible(true);

@@ -41,7 +41,7 @@ class GameBoard {
 	/**
 	 * variable that stores the current instance of the glass pane
 	 */
-	private EndGlassPane glass = new EndGlassPane();
+	private EndGlassPane glass = new EndGlassPane(boardSize);
 
 	/**
 	 * no argument constructor that calls the parent's constructor
@@ -112,10 +112,16 @@ class GameBoard {
 
 		try {
 
-			Image imgO = ImageIO
-					.read(Main.class.getResource("resources/O.jpg"));
-			Image imgX = ImageIO
-					.read(Main.class.getResource("resources/X.jpg"));
+			Image imgO;
+			Image imgX;
+			if(boardSize > 3) {
+				imgO = ImageIO.read(Main.class.getResource("resources/OSmall.jpg"));
+				imgX = ImageIO.read(Main.class.getResource("resources/XSmall.jpg"));
+			}
+			else{
+				imgO = ImageIO.read(Main.class.getResource("resources/O.jpg"));
+				imgX = ImageIO.read(Main.class.getResource("resources/X.jpg"));
+			}
 
 			for (int i = 0; i < boardSize; i++) {
 				for (int y = 0; y < boardSize; y++) {
@@ -126,7 +132,7 @@ class GameBoard {
 			}
 		} catch (IOException ex) {
 
-			System.out.print("The needed files 0.jpg and X.jpg were not found");
+			System.out.print("The needed files 0.jpg/0Small.jpg and X.jpg/XSmall.jpg were not found");
 
 		}
 
@@ -286,16 +292,16 @@ class GameBoard {
 
 		if (xVictory) {
 			if (compX || compO)
-				glass.setVWin(col, "Computer X Wins!");
+				glass.setVerticalWin(col, "Computer X Wins!");
 			else
-				glass.setVWin(col, "1st Player X Wins!");
+				glass.setVerticalWin(col, "1st Player X Wins!");
 
 		}
 		if (oVictory) {
 			if (compX || compO)
-				glass.setVWin(col, "Computer O Wins!");
+				glass.setVerticalWin(col, "Computer O Wins!");
 			else
-				glass.setVWin(col, "2nd Player O Wins!");
+				glass.setVerticalWin(col, "2nd Player O Wins!");
 		}
 
 	}

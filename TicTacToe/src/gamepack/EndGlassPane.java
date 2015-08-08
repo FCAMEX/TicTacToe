@@ -51,15 +51,19 @@ class EndGlassPane extends JPanel {
 	 * stores the y ending coordinate of the winning line indicator
 	 */
 	private int y2 = 0;
-
+	/**
+	 * stores the boardSize of the current game board
+	 */
+	private int boardSize = 0;
 	/**
 	 * no-argument class constructor, sets the boolean indicators tie and win to
 	 * false
 	 */
-	public EndGlassPane() {
+	public EndGlassPane( int boardSize) {
 		super();
 		tie = false;
 		win = false;
+		this.boardSize = boardSize;
 
 	}
 
@@ -72,13 +76,14 @@ class EndGlassPane extends JPanel {
 	 * @param winner
 	 *            the winner string indicating the winning player
 	 */
-	public void setVWin(int pos, String winner) {
+	public void setVerticalWin(int pos, String winner) {
 
 		win = true;
 
-		x1 = 85 + (pos * 115);
-		y1 = 190;
-		x2 = 85 + (pos * 115);
+
+		x1 = 85 - (5 *(boardSize-3 ) + (pos * (115-(30 * (boardSize-3))) ));
+		x2 = 85 - (5 *(boardSize-3) ) + (pos * (115-(30 * (boardSize-3))) );
+		y1 = 190 - (20* (boardSize-3));
 		y2 = 490;
 		winLabel = winner;
 		repaint();
@@ -88,7 +93,7 @@ class EndGlassPane extends JPanel {
 	/**
 	 * set method that sets up and draws the winner label and line indicator if
 	 * the victory is in a horizontal position (row)
-	 * 
+	 *
 	 * @param pos
 	 *            the position (row) of the horizontal win
 	 * @param winner
@@ -99,9 +104,9 @@ class EndGlassPane extends JPanel {
 		win = true;
 
 		x1 = 60;
-		y1 = 210 + (pos * 125);
+		y1 = 210 - (30 *( boardSize-3)) + (pos * (122 - (20 * (boardSize-3))));
 		x2 = 350;
-		y2 = 210 + (pos * 125);
+		y2 = 210 - (30 *( boardSize-3)) + (pos * (122 - (20 * (boardSize-3))));
 		winLabel = winner;
 		repaint();
 
