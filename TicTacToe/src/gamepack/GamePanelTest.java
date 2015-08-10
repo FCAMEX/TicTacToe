@@ -6,16 +6,14 @@ import org.junit.Test;
 
 public class GamePanelTest {
 
-	int size = 3;
-	boolean compX = false;
-	boolean compY = false;
-	
+	private int size = 3;
+
 	@Test
 	public void GamePanelConstructorTest() {
 		
 		
 		EndGlassPane glass = new EndGlassPane(size);
-		GamePanel tester = new GamePanel(size, glass, compX, compY);
+		GamePanel tester = new GamePanel(size, glass, false, false);
 		tester.game.board[0][0].doClick();
 	
 		assertNotEquals("After click, the tile should hold a different value than the rest",tester.game.board[0][0].getTileValue(), tester.game.board[0][1].getTileValue());

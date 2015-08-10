@@ -70,7 +70,7 @@ public class MainFrame extends JFrame {
 	/**
 	 * Text field to store user input and change size of the grid
 	 */
-	JTextField sizeGrid = new JTextField();
+	private JTextField sizeGrid = new JTextField();
 
 	/**
 	 * no-argument constructor, calls for the setup of first Menu and defines
@@ -354,8 +354,7 @@ public class MainFrame extends JFrame {
 					
 					String inputSize = sizeGrid.getText();
 					inputSize = inputSize.trim();
-					int newSize = Integer.parseInt(inputSize);
-					boardSize = newSize;
+					boardSize = Integer.parseInt(inputSize);
 					remove(firstMenu);
 					remove(menu);
 					setupFirstMenu();

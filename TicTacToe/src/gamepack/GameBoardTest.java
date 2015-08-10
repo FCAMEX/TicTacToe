@@ -6,9 +6,9 @@ import org.junit.Test;
 
 public class GameBoardTest {
 	
-	int size = 3;
-	boolean compX = false;
-	boolean compY = false;
+	private int size = 3;
+	private boolean compX = false;
+	private boolean compY = false;
 		
 	@Test
 	public void testGameBoardConstructor() {
@@ -28,7 +28,7 @@ public class GameBoardTest {
 		EndGlassPane glass = new EndGlassPane(size);
 		GameBoard tester = new GameBoard(size, glass, compX, compY );
 		
-		assertEquals("noVicotry() method should return true for a newly created GameBoard ", true ,tester.noVictory());
+		assertEquals("noVictory() method should return true for a newly created GameBoard ", true ,tester.noVictory());
 		
 	}
 
@@ -39,7 +39,7 @@ public class GameBoardTest {
 		EndGlassPane glass = new EndGlassPane(size);
 		GameBoard tester = new GameBoard(size, glass, compX, compY );
 		
-		assertEquals("getSice() should return the current boardSize value", 3, tester.getSize());
+		assertEquals("getSize() should return the current boardSize value", 3, tester.getSize());
 	}
 
 	@Test
