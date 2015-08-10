@@ -21,7 +21,7 @@ public class GamePanel extends JPanel {
 	/**
 	 * variable that holds an instance of the GameBoard currently in use
 	 */
-	private GameBoard game = new GameBoard();
+	 GameBoard game = new GameBoard();
 	/**
 	 * variable that holds the current turn count of the game
 	 */

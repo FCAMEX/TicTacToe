@@ -81,10 +81,10 @@ class EndGlassPane extends JPanel {
 		win = true;
 
 
-		x1 = 85 - (5 *(boardSize-3 ) + (pos * (115-(30 * (boardSize-3))) ));
-		x2 = 85 - (5 *(boardSize-3) ) + (pos * (115-(30 * (boardSize-3))) );
-		y1 = 190 - (20* (boardSize-3));
-		y2 = 490;
+		x1 =  85 + (pos * (115-(30 * (boardSize-3))) );
+		x2 = 85  + (pos * (115-(30 * (boardSize-3))) );
+		y1 = 200 ;
+		y2 = 520;
 		winLabel = winner;
 		repaint();
 
@@ -104,9 +104,9 @@ class EndGlassPane extends JPanel {
 		win = true;
 
 		x1 = 60;
-		y1 = 210 - (30 *( boardSize-3)) + (pos * (122 - (20 * (boardSize-3))));
+		y1 = 250 - (30 *( boardSize-3)) + (pos * (122 - (20 * (boardSize-3))));
 		x2 = 350;
-		y2 = 210 - (30 *( boardSize-3)) + (pos * (122 - (20 * (boardSize-3))));
+		y2 = 250 - (30 *( boardSize-3)) + (pos * (122 - (20 * (boardSize-3))));
 		winLabel = winner;
 		repaint();
 
@@ -126,12 +126,21 @@ class EndGlassPane extends JPanel {
 		win = true;
 
 		x1 = 60 + (pos * 290);
-		y1 = 190;
+		y1 = 200;
 		x2 = 350 - (pos * 290);
-		y2 = 490;
+		y2 = 530 + (20 *( boardSize-3) );
 		winLabel = winner;
 		repaint();
 
+	}
+	
+	/**
+	 * get method that returns if the game has been tied or not
+	 *
+	 */
+	public boolean getTie() {
+
+		return this.tie;
 	}
 
 	/**

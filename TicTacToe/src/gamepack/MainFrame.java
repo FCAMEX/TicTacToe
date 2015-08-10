@@ -62,6 +62,15 @@ public class MainFrame extends JFrame {
 	 * for computer or player going first
 	 */
 	private JPanel turnSelect = new JPanel();
+	/**
+	 * panel used to store the components of the options menu stores buttons
+	 * to select grid size but can be further expanded in the future
+	 */
+	private JPanel optionsSelect = new JPanel();
+	/**
+	 * Text field to store user input and change size of the grid
+	 */
+	JTextField sizeGrid = new JTextField();
 
 	/**
 	 * no-argument constructor, calls for the setup of first Menu and defines
@@ -109,25 +118,32 @@ public class MainFrame extends JFrame {
 		JButton pvp = new JButton("Player vs Player");
 		JButton pvc = new JButton("Player vs Computer");
 		JButton cvc = new JButton("Computer vs Computer");
-
+		JButton options = new JButton("Options");
+		
 		pvp.setPreferredSize(new Dimension(50, 50));
 		pvc.setPreferredSize(new Dimension(50, 50));
 		cvc.setPreferredSize(new Dimension(50, 50));
+		options.setPreferredSize(new Dimension(50, 50));
 		pvp.setFocusPainted(false);
 		pvc.setFocusPainted(false);
 		cvc.setFocusPainted(false);
+		options.setFocusPainted(false);
+		
 		pvp.setFont(new Font("Arial", Font.BOLD, 30));
 		pvc.setFont(new Font("Arial", Font.BOLD, 30));
 		cvc.setFont(new Font("Arial", Font.BOLD, 30));
-
+		options.setFont(new Font("Arial", Font.BOLD, 30));
+		
 		pvp.addActionListener(new MainActions());
 		pvc.addActionListener(new MainActions());
 		cvc.addActionListener(new MainActions());
-
+		options.addActionListener(new MainActions());
+		
 		firstMenu.setBorder(BorderFactory.createEmptyBorder(10, 15, 15, 15));
 		gameMode.add(pvp);
 		gameMode.add(pvc);
 		gameMode.add(cvc);
+		gameMode.add(options);
 		firstMenu.add(firstLog);
 		firstMenu.add(gameMode);
 
@@ -157,6 +173,35 @@ public class MainFrame extends JFrame {
 		turnSelect.add(comp);
 		player.addActionListener(new MainActions());
 		comp.addActionListener(new MainActions());
+	}
+	
+	/**
+	 * method that sets up the options select menu, its properties and buttons
+	 */
+	private void optionsSelect() {
+
+		optionsSelect = new JPanel();
+		JLabel sizeLabel = new JLabel("Size");
+		sizeGrid = new JTextField ("   3 ");
+		JButton enter = new JButton("Enter");
+		
+		optionsSelect.setBorder(BorderFactory.createEmptyBorder(10, 15, 40, 15));
+		optionsSelect.setBorder(BorderFactory.createBevelBorder(BevelBorder.LOWERED));
+		JLabel optionsMenu = new JLabel(" Options Menu",
+				SwingConstants.CENTER);
+		optionsMenu.setPreferredSize(new Dimension(300, 50));
+		optionsMenu.setFont(new Font("Arial", Font.BOLD, 20));
+		sizeLabel.setPreferredSize(new Dimension(110, 40));
+		sizeGrid.setPreferredSize(new Dimension(60, 30));
+		enter.setPreferredSize(new Dimension(70, 30));
+		sizeLabel.setFont(new Font("Arial", Font.BOLD, 20));
+		sizeGrid.setFont(new Font("Arial", Font.BOLD, 20));
+		optionsSelect.add(optionsMenu);
+		optionsSelect.add(sizeLabel);
+		optionsSelect.add(sizeGrid);
+		optionsSelect.add(enter);
+		enter.addActionListener(new MainActions());
+		
 	}
 
 	/**
@@ -295,6 +340,28 @@ public class MainFrame extends JFrame {
 					revalidate();
 					repaint();
 
+				}
+				if (((JButton) source).getText().equals("Options")) {
+
+					firstMenu.remove(gameMode);
+					optionsSelect();
+					firstMenu.add(optionsSelect);
+					firstMenu.revalidate();
+					firstMenu.repaint();
+
+				}
+				if (((JButton) source).getText().equals("Enter")) {
+					
+					String inputSize = sizeGrid.getText();
+					inputSize = inputSize.trim();
+					int newSize = Integer.parseInt(inputSize);
+					boardSize = newSize;
+					remove(firstMenu);
+					remove(menu);
+					setupFirstMenu();
+					topPane.setVisible(false);
+					revalidate();
+					repaint();
 				}
 
 			}
