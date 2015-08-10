@@ -354,7 +354,10 @@ public class MainFrame extends JFrame {
 					
 					String inputSize = sizeGrid.getText();
 					inputSize = inputSize.trim();
-					boardSize = Integer.parseInt(inputSize);
+					if(Integer.parseInt(inputSize) < 2 || Integer.parseInt(inputSize) > 4 )
+						boardSize = 3;
+					else
+						boardSize = Integer.parseInt(inputSize);
 					remove(firstMenu);
 					remove(menu);
 					setupFirstMenu();

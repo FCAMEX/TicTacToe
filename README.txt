@@ -50,6 +50,7 @@ Main Menu
 
 - Select Computer Vs Computer ----- to watch the computer play against another computer**
 
+- Select Options ----- to open the Options menu and change the Game Board size to any size between 2 and 4***
 
 Game Menu
 
@@ -68,6 +69,9 @@ IMPORTANT NOTES:
 **In the Computer vs Computer mode the algorithm runs until they reach a tie. It uses the same algorithm that is utilized in Person vs Computer mode
 (the program lumps all the requested redraw() calls together and therefore only draws the outcome of the match)  
 if this is a problem I can try to solve by splitting the program into multiple threads 
+
+*** The board is currently optimized for size 3. If the user picks any size other than 3, the player vs player option will still work properly,
+but the Computer player options will not.
 
 
 ***********************************************************************************************************************************************************
